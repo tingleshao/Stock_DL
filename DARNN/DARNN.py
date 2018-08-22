@@ -22,8 +22,6 @@ class encoder(nn.Module):
         self.hidden_size = hidden_size
         self.T = T
         self.device = device
-
-
         self.attn_weights = nn.Parameter(torch.rand([batch_size, n_stock],
                             dtype=None, device=device, requires_grad=False))
 
@@ -34,6 +32,7 @@ class encoder(nn.Module):
                                         hidden_size = hidden_size,
                                         batch_first = True)
         self.compress = nn.Tanh()
+
     # TODO(chongshao): Maybe find a specific large matrix multiply function?
     def forward(self, input_data, y_history):
 #        print('alpha max', self.attn_weights.max())
@@ -53,7 +52,6 @@ class encoder(nn.Module):
         exogenous_encoded, (_, _) = self.exogenous_encode(weighted_input)
 
         return exogenous_encoded, y_encoded
-
 
 
 class decoder(nn.Module):

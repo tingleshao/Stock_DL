@@ -56,7 +56,10 @@ PARALLEL = args.parallel
 TEST = args.test
 
 learning_rate = 1e-4
-TRAIN_SIZE = 100
+if TEST:
+    TRAIN_SIZE = 2
+else:
+    TRAIN_SIZE = 100
 #TEST_SIZE = 2
 INPUT_DIM = 2
 #HIDDEN_DIM = 14
@@ -167,7 +170,7 @@ decoder_optimizer = optim.Adam(params = filter(lambda p: p.requires_grad, decode
                                    lr = learning_rate)
 
 # Assign loss function
-loss_func = nn.MSELoss()
+loss_func = nn.L1Loss()
 
 # Lets try the data loader
 if TEST:
