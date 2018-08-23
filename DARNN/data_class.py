@@ -29,6 +29,7 @@ class StockDataset(Dataset):
                               requires_grad=False,
                               device = self.device)
         self.target = pd_data[ylabel, 'RET'].copy().fillna(0).values
+        self.target = (self.target > 0).astype('float64')
         self.target = torch.tensor(self.target, 
                                    dtype = torch.float64,
                                    requires_grad=False,
